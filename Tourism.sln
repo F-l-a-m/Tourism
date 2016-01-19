@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tourism.Domain", "Tourism.Domain\Tourism.Domain.csproj", "{851C875E-99DB-4AD6-9325-78C4B783D808}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tourism.WebUI", "Tourism.WebUI\Tourism.WebUI.csproj", "{8BB76ADA-75C4-40C9-A545-87F9336F2C91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tourism.UnitTests", "Tourism.UnitTests\Tourism.UnitTests.csproj", "{FACB07B4-73A2-4005-93AE-BC74F1C56A37}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{851C875E-99DB-4AD6-9325-78C4B783D808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{851C875E-99DB-4AD6-9325-78C4B783D808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{851C875E-99DB-4AD6-9325-78C4B783D808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{851C875E-99DB-4AD6-9325-78C4B783D808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB76ADA-75C4-40C9-A545-87F9336F2C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB76ADA-75C4-40C9-A545-87F9336F2C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB76ADA-75C4-40C9-A545-87F9336F2C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB76ADA-75C4-40C9-A545-87F9336F2C91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FACB07B4-73A2-4005-93AE-BC74F1C56A37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FACB07B4-73A2-4005-93AE-BC74F1C56A37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FACB07B4-73A2-4005-93AE-BC74F1C56A37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FACB07B4-73A2-4005-93AE-BC74F1C56A37}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
