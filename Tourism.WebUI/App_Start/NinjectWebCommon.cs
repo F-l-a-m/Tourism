@@ -53,6 +53,8 @@ namespace Tourism.WebUI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            System.Web.Mvc.DependencyResolver.SetResolver(new
+                Tourism.WebUI.Infrastructure.NinjectDependencyResolver(kernel));
         }        
     }
 }
