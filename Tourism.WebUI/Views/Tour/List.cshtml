@@ -1,0 +1,13 @@
+﻿@using Tourism.Domain.Entities
+@model IEnumerable<Tour>
+@{
+    ViewBag.Title = "Available tours:";
+}
+@foreach (var t in Model)
+{
+    <div>
+        <h3>@t.Name</h3>
+        @t.Description
+        <h4>@t.Price.ToString("c")</h4>
+    </div>
+}
