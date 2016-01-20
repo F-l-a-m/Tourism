@@ -1,9 +1,10 @@
-﻿@using Tourism.Domain.Entities
-@model IEnumerable<Tour>
+﻿@model Tourism.WebUI.Models.ToursListViewModel
+
 @{
-    ViewBag.Title = "Available tours";
+    ViewBag.Title = "Tours";
 }
-@foreach (var t in Model)
+
+@foreach (var t in Model.Tours)
 {
     <div>
         <h3>@t.Name</h3>
@@ -11,3 +12,7 @@
         <h4>@t.Price.ToString("c")</h4>
     </div>
 }
+
+<div>
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
+</div>
