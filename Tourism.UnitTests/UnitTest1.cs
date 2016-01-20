@@ -124,5 +124,59 @@ namespace Tourism.UnitTests
             Assert.IsTrue(result[0].Name == "P2" && result[0].Category == "Cat2");
             Assert.IsTrue(result[1].Name == "P4" && result[1].Category == "Cat2");
         }
+
+        [TestMethod]
+        public void Can_Create_Categories()
+        {
+            // Arrange
+            // - create the mock repository
+            Mock<ITourRepository> mock = new Mock<ITourRepository>();
+            mock.Setup(m => m.Tours).Returns(new Tour[] 
+            {
+            new Tour {TourID = 1, Name = "P1", Category = "Apples"},
+            new Tour {TourID = 2, Name = "P2", Category = "Apples"},
+            new Tour {TourID = 3, Name = "P3", Category = "Plums"},
+            new Tour {TourID = 4, Name = "P4", Category = "Oranges"},
+            } );
+
+            // Arrange - create the controller
+            NavController target = new NavController(mock.Object);
+
+            // Act = get the set of categories
+            string[] results = ((IEnumerable<string>)target.Menu().Model).ToArray();
+
+            // Assert
+            Assert.AreEqual(results.Length, 3);
+            Assert.AreEqual(results[0], "Apples");
+            Assert.AreEqual(results[1], "Oranges");
+            Assert.AreEqual(results[2], "Plums");
+        }
+
+        [TestMethod]
+        public void Indicates_Selected_Category()
+        {
+            // Arrange
+            // - create the mock repository
+            Mock<ITourRepository> mock = new Mock<ITourRepository>();
+            mock.Setup(m => m.Tours).Returns(new Tour[] 
+            {
+                new Tour {TourID = 1, Name = "P1", Category = "Apples"},
+                new Tour {TourID = 4, Name = "P2", Category = "Oranges"},
+            } );
+
+            // Arrange - create the controller
+            NavController target = new NavController(mock.Object);
+
+            // Arrange - define the category to selected
+            string categoryToSelect = "Apples";
+
+            // Action
+            string result = target.Menu(categoryToSelect).ViewBag.SelectedCategory;
+
+            // Assert
+            Assert.AreEqual(categoryToSelect, result);
+        }
+
+
     }
 }
