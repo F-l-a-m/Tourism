@@ -19,11 +19,12 @@ namespace Tourism.WebUI.Controllers
             this.repository = tourRepository;
         }
 
-        public ViewResult List(int page = 1)
+        public ViewResult List(string category, int page = 1)
         {
             ToursListViewModel model = new ToursListViewModel
             {
                 Tours = repository.Tours
+                .Where(t => category == null || t.Category == category)
                 .OrderBy(t => t.TourID)
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize),
@@ -32,7 +33,8 @@ namespace Tourism.WebUI.Controllers
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
                     TotalItems = repository.Tours.Count()
-                }
+                },
+                CurrentCategory = category
             };
             return View(model);
         }

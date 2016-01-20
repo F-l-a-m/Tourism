@@ -6,13 +6,9 @@
 
 @foreach (var t in Model.Tours)
 {
-    <div>
-        <h3>@t.Name</h3>
-        @t.Description
-        <h4>@t.Price.ToString("c")</h4>
-    </div>
+    @Html.Partial("TourSummary", t)
 }
 
-<div>
+<div class="btn-group pull-right">
     @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
 </div>

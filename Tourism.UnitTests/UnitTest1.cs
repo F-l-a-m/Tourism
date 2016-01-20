@@ -32,7 +32,7 @@ namespace Tourism.UnitTests
             controller.PageSize = 3;
 
             // Act
-            ToursListViewModel result = (ToursListViewModel)controller.List(2).Model;
+            ToursListViewModel result = (ToursListViewModel)controller.List(null, 2).Model;
 
             // Assert
             Tour[] tourArray = result.Tours.ToArray();
@@ -79,14 +79,14 @@ namespace Tourism.UnitTests
                 new Tour {TourID = 3, Name = "P3"},
                 new Tour {TourID = 4, Name = "P4"},
                 new Tour {TourID = 5, Name = "P5"}
-            } );
+            });
 
             // Arrange
             TourController controller = new TourController(mock.Object);
             controller.PageSize = 3;
 
             // Act
-            ToursListViewModel result = (ToursListViewModel)controller.List(2).Model;
+            ToursListViewModel result = (ToursListViewModel)controller.List(null, 2).Model;
 
             // Assert
             PagingInfo pageInfo = result.PagingInfo;
@@ -96,6 +96,33 @@ namespace Tourism.UnitTests
             Assert.AreEqual(pageInfo.TotalPages, 2);
         }
 
+        [TestMethod]
+        public void Can_Filter_Tours()
+        {
+            // Arrange
+            // - create the mock repository
+            Mock<ITourRepository> mock = new Mock<ITourRepository>();
+            mock.Setup(m => m.Tours).Returns(new Tour[] 
+            {
+            new Tour {TourID = 1, Name = "P1", Category = "Cat1"},
+            new Tour {TourID = 2, Name = "P2", Category = "Cat2"},
+            new Tour {TourID = 3, Name = "P3", Category = "Cat1"},
+            new Tour {TourID = 4, Name = "P4", Category = "Cat2"},
+            new Tour {TourID = 5, Name = "P5", Category = "Cat3"}
+            } );
 
+            // Arrange - create a controller and make the page size 3 items
+            TourController controller = new TourController(mock.Object);
+            controller.PageSize = 3;
+
+            // Action
+            Tour[] result = ((ToursListViewModel)controller.List("Cat2", 1).Model)
+            .Tours.ToArray();
+
+            // Assert
+            Assert.AreEqual(result.Length, 2);
+            Assert.IsTrue(result[0].Name == "P2" && result[0].Category == "Cat2");
+            Assert.IsTrue(result[1].Name == "P4" && result[1].Category == "Cat2");
+        }
     }
 }

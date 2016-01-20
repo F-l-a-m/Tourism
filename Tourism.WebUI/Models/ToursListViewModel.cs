@@ -7,5 +7,6 @@ namespace Tourism.WebUI.Models
     {
         public IEnumerable<Tour> Tours { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public string CurrentCategory { get; set; }
     }
 }
