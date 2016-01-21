@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using Moq;
@@ -29,6 +30,15 @@ namespace Tourism.WebUI.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<ITourRepository>().To<EFTourRepository>();
+
+            EmailSettings emailSettings = new EmailSettings
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager
+                    .AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+
+            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
+                   .WithConstructorArgument("settings", emailSettings);
         }
     }
 }
