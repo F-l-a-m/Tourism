@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Tourism.Domain.Entities;
+using Tourism.WebUI.Infrastructure.Binders;
 
 namespace Tourism.WebUI
 {
@@ -13,6 +15,7 @@ namespace Tourism.WebUI
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
         }
     }
 }
