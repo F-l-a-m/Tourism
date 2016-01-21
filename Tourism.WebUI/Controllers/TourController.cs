@@ -32,7 +32,9 @@ namespace Tourism.WebUI.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = repository.Tours.Count()
+                    TotalItems = category == null ?
+                        repository.Tours.Count() :
+                        repository.Tours.Where(e => e.Category == category).Count()
                 },
                 CurrentCategory = category
             };

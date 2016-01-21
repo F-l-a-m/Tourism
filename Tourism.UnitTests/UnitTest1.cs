@@ -177,6 +177,40 @@ namespace Tourism.UnitTests
             Assert.AreEqual(categoryToSelect, result);
         }
 
+        [TestMethod]
+        public void Generate_Category_Specific_Tour_Count() {
+            // Arrange
+            // - create the mock repository
+            Mock<ITourRepository> mock = new Mock<ITourRepository>();
+            mock.Setup(m => m.Tours).Returns(new Tour[] {
+            new Tour {TourID = 1, Name = "P1", Category = "Cat1"},
+            new Tour {TourID = 2, Name = "P2", Category = "Cat2"},
+            new Tour {TourID = 3, Name = "P3", Category = "Cat1"},
+            new Tour {TourID = 4, Name = "P4", Category = "Cat2"},
+            new Tour {TourID = 5, Name = "P5", Category = "Cat3"}
+            });
+
+            // Arrange - create a controller and make the page size 3 items
+            TourController target = new TourController(mock.Object);
+            target.PageSize = 3;
+
+            // Action - test the Tour counts for different categories
+            int res1 = ((ToursListViewModel)target
+            .List("Cat1").Model).PagingInfo.TotalItems;
+            int res2 = ((ToursListViewModel)target
+            .List("Cat2").Model).PagingInfo.TotalItems;
+            int res3 = ((ToursListViewModel)target
+            .List("Cat3").Model).PagingInfo.TotalItems;
+            int resAll = ((ToursListViewModel)target
+            .List(null).Model).PagingInfo.TotalItems;
+
+            // Assert
+            Assert.AreEqual(res1, 2);
+            Assert.AreEqual(res2, 2);
+            Assert.AreEqual(res3, 1);
+            Assert.AreEqual(resAll, 5);
+        }
+
 
     }
 }
