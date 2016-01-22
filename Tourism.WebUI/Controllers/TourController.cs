@@ -40,5 +40,19 @@ namespace Tourism.WebUI.Controllers
             };
             return View(model);
         }
+
+        public FileContentResult GetImage(int tourId)
+        {
+            Tour prod = repository.Tours
+            .FirstOrDefault(t => t.TourID == tourId);
+            if (prod != null)
+            {
+                return File(prod.ImageData, prod.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

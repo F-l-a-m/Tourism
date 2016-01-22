@@ -1,6 +1,16 @@
 ﻿@model Tourism.Domain.Entities.Tour
 
-<div class="well">
+<div class="well" style="height: 240px;">
+
+    @if (Model.ImageData != null)
+    {
+        <div class="pull-left" style="margin-right: 10px">
+            <img class="img-thumbnail" width="200" height="200"
+                 src="@Url.Action("GetImage", "Tour", new { Model.TourID })" />
+        </div>
+        string src = Url.Action("GetImage", "Tour", new { Model.TourID });
+    }
+    
     <h3>
         <strong>@Model.Name</strong>
         <span class="pull-right label label-primary">@Model.Price.ToString("c")</span>

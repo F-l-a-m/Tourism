@@ -29,6 +29,8 @@ namespace Tourism.Domain.Concrete
                     dbEntry.Description = tour.Description;
                     dbEntry.Price = tour.Price;
                     dbEntry.Category = tour.Category;
+                    dbEntry.ImageData = tour.ImageData;
+                    dbEntry.ImageMimeType = tour.ImageMimeType;
                 }
             }
             context.SaveChanges();

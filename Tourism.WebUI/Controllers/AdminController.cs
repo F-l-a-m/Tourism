@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Tourism.Domain.Abstract;
 using Tourism.Domain.Entities;
@@ -29,10 +30,16 @@ namespace Tourism.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Tour tour)
+        public ActionResult Edit(Tour tour, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    tour.ImageMimeType = image.ContentType;
+                    tour.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(tour.ImageData, 0, image.ContentLength);
+                }
                 repository.SaveTour(tour);
                 TempData["message"] = string.Format("{0} has been saved", tour.Name);
                 return RedirectToAction("Index");
