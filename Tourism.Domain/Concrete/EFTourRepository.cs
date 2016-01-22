@@ -33,5 +33,16 @@ namespace Tourism.Domain.Concrete
             }
             context.SaveChanges();
         }
+
+        public Tour DeleteTour(int tourID)
+        {
+            Tour dbEntry = context.Tours.Find(tourID);
+            if (dbEntry != null)
+            {
+                context.Tours.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
     }
 }

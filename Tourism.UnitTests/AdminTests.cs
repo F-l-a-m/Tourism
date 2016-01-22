@@ -129,5 +129,30 @@ namespace Tourism.UnitTests
             // Assert - check the method result type
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+
+        [TestMethod]
+        public void Can_Delete_Valid_Tours()
+        {
+            // Arrange - create a Tour
+            Tour tour = new Tour { TourID = 2, Name = "Test" };
+
+            // Arrange - create the mock repository
+            Mock<ITourRepository> mock = new Mock<ITourRepository>();
+            mock.Setup(m => m.Tours).Returns(new Tour[] {
+                new Tour {TourID = 1, Name = "P1"},
+                tour,
+                new Tour {TourID = 3, Name = "P3"},
+            });
+
+            // Arrange - create the controller
+            AdminController target = new AdminController(mock.Object);
+
+            // Act - delete the touruct
+            target.Delete(tour.TourID);
+
+            // Assert - ensure that the repository delete method was
+            // called with the correct Tour
+            mock.Verify(m => m.DeleteTour(tour.TourID));
+        }
     }
 }

@@ -8,5 +8,7 @@ namespace Tourism.Domain.Abstract
         IEnumerable<Tour> Tours { get; }
 
         void SaveTour(Tour tour);
+
+        Tour DeleteTour(int tourID);
     }
 }

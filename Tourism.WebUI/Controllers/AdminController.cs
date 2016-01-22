@@ -46,5 +46,17 @@ namespace Tourism.WebUI.Controllers
         {
             return View("Edit", new Tour());
         }
+
+        [HttpPost]
+        public ActionResult Delete(int tourId)
+        {
+            Tour deletedTour = repository.DeleteTour(tourId);
+
+            if (deletedTour != null)
+            {
+                TempData["message"] = string.Format("{0} was deleted", deletedTour.Name);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
