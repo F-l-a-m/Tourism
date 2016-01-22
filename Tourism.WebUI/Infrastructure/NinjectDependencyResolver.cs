@@ -8,6 +8,8 @@ using Ninject;
 using Tourism.Domain.Abstract;
 using Tourism.Domain.Concrete;
 using Tourism.Domain.Entities;
+using Tourism.WebUI.Infrastructure.Abstract;
+using Tourism.WebUI.Infrastructure.Concrete;
 
 namespace Tourism.WebUI.Infrastructure
 {
@@ -39,6 +41,8 @@ namespace Tourism.WebUI.Infrastructure
 
             kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
                    .WithConstructorArgument("settings", emailSettings);
+
+            kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
         }
     }
 }

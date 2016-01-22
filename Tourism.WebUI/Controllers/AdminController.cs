@@ -5,6 +5,8 @@ using Tourism.Domain.Entities;
 
 namespace Tourism.WebUI.Controllers
 {
+
+    [Authorize]
     public class AdminController : Controller
     {
         private ITourRepository repository;
